@@ -18,7 +18,7 @@ export default function HomePage() {
   })
 
   const getGame = async () => {
-    const response = await fetch("http://54.83.110.196:8000/games")
+    const response = await fetch("http://localhost:8000/games")
     const data = await response.json()
     console.log(data._doc)
 
