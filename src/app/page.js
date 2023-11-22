@@ -35,7 +35,7 @@ export default function HomePage() {
   }, [gaming])
 
   const getGame = async () => {
-    const response = await fetch("http://localhost:8000/games")
+    const response = await fetch("https://kg-web-server.onrender.com/games")
     const data = await response.json()
     console.log(data._doc)
 
