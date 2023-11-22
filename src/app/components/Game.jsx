@@ -12,12 +12,9 @@ export default function Game({ game }) {
     const [pha_ser, setPhaser] = useState(null)
 
     useEffect(() => {
-        const app = document.querySelector("body")
-        console.log(app.clientWidth, app.clientHeight)
-
         const startGame = async () => {
-            const _phaser = await initGame(app.clientWidth, 643)
-            dimension = { width: app.clientWidth, height: 643}
+            const _phaser = await initGame()
+            dimension = { width: 1200, height: 600}
 
             setPhaser(_phaser)
             phaser = _phaser
@@ -28,15 +25,19 @@ export default function Game({ game }) {
         console.log(GameVar, "game", game)
     }, [])
 
-    const initGame = async (width, height) => {
+    const initGame = async () => {
         const Phaser = await import("phaser")
-        const { default: LoadingScene } = await import("../../scenes/LoadGame.js")
-        const { default: GameScene } = await import("../../scenes/Game.js")
+        const { LoadingScene } = await import("../../scenes/LoadGame.js")
+        const { GameScene } = await import("../../scenes/Game.js")
 
         const phaser = new Phaser.Game({
             type: Phaser.AUTO,
-            width,
-            height,
+            scale: {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+                width: 1200,
+                height: 600
+            },
             backgroundColor: 0x000000,
             pixelArt: true,
             scene: [LoadingScene, GameScene],
@@ -45,6 +46,9 @@ export default function Game({ game }) {
                 arcade: {
                     debug: false
                 }
+            },
+            audio: {
+                disableWebAudio: false
             }
         })
 

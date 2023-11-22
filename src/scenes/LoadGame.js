@@ -1,7 +1,7 @@
 import { dimension, phaser, GameVar } from "@/app/components/Game"
 import Phaser from "phaser"
 
-export default class LoadingScene extends Phaser.Scene {
+export class LoadingScene extends Phaser.Scene {
     constructor() {
         super("LoadGame")
     }
@@ -9,6 +9,10 @@ export default class LoadingScene extends Phaser.Scene {
     preload() {
         // Load background image
         this.load.image("background", "grass/grass-1.jpg")
+
+        // Load beam images
+        this.load.image("blue_beam", "beam/blue_beam.png")
+        this.load.image("red_beam", "beam/red_beam.png")
 
         // Load spritesheets
         this.load.spritesheet("blue_tank_fire", "bluetank/right_fire_blue-Sheet.png", {
@@ -20,8 +24,8 @@ export default class LoadingScene extends Phaser.Scene {
             frameHeight : 64
         })
         this.load.spritesheet("explode", "explosion/explosion.png", {
-            frameWidth : 16,
-            frameHeight : 16
+            frameWidth : 256,
+            frameHeight : 256
         })
 
         // Load sounds

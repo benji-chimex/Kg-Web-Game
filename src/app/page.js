@@ -10,20 +10,46 @@ export default function HomePage() {
   const [game, setGame] = useState()
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      getGame()
+    const timeout01 = setTimeout(() => {
+      setGaming(true)
     }, (INTERVAL*60*1000) + 5000)
 
-    return () => clearTimeout(timeout)
-  })
+    let timeout02 = null
+
+    const _game = async () => {
+      const {duration, gameId} = await getGame()
+      console.log(duration, gameId)
+
+      timeout02 = setTimeout(() => {
+        endGame(gameId)
+      }, (duration*60*1000) + (INTERVAL*60*1000) + 15000)
+      console.log(timeout02)
+    }
+
+    _game()
+
+    return () => {
+      clearTimeout(timeout01)
+      clearTimeout(timeout02)
+    }
+  }, [gaming])
 
   const getGame = async () => {
-    const response = await fetch("https://kg-web-server.onrender.com/games")
+    const response = await fetch("http://localhost:8000/games")
     const data = await response.json()
     console.log(data._doc)
 
     setGame(data._doc)
-    setGaming(true)
+
+    return data._doc
+  }
+
+  const endGame = async (id) => {
+    const response = await fetch(`http://localhost:8000/deactivate/${id}`)
+    const data = await response.text()
+    console.log(data)
+
+    data == "Success" ? setGaming(false) : null
   }
 
   return (

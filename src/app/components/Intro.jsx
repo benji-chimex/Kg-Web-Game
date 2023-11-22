@@ -20,7 +20,7 @@ export default function Intro({ duration }) {
 
     useEffect(() => {
         h1_typed.current = new Typed(h1_el.current, {
-            strings : ["Welcome to the KingdomGame"],
+            strings : ["Welcome to the EmpireGame"],
             typeSpeed : 100
         })
         h3_01_typed.current = new Typed(h3_01_el.current, {
