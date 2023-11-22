@@ -35,15 +35,13 @@ export class GameScene extends Phaser.Scene {
             id : GameVar.players[0].userId,
             username : GameVar.players[0].username,
             score : 0,
-            activeTanks : GameVar.players[0].activeTanks,
-            reserveTanks : GameVar.players[0].reserveTanks,
+            tanks : GameVar.players[0].tanks
         }
         this.playerB = {
             id : GameVar.players[1].userId,
             username : GameVar.players[1].username,
             score : 0,
-            activeTanks : GameVar.players[1].activeTanks,
-            reserveTanks : GameVar.players[1].reserveTanks,
+            tanks : GameVar.players[1].tanks,
         }
 
         this.add.text(25, 25, `${this.playerA.username}`, {
@@ -105,11 +103,11 @@ export class GameScene extends Phaser.Scene {
             explode.play("explode_anim")
             this.explosion.play()
 
-            console.log(this.playerA.activeTanks, this.playerB.activeTanks)
+            console.log(this.playerA.tanks, this.playerB.tanks)
 
             this.scoreA.setText(`SCORE:${this.playerA.score + 1}`)
             this.playerA.score += 1
-            this.playerB.activeTanks -= 1
+            this.playerB.tanks -= 1
         })
 
         this.physics.add.collider(this.red_beams, this.blue_tanks, (beam, tank) => {
@@ -120,11 +118,11 @@ export class GameScene extends Phaser.Scene {
             explode.play("explode_anim")
             this.explosion.play()
 
-            console.log(this.playerA.activeTanks, this.playerB.activeTanks)
+            console.log(this.playerA.tanks, this.playerB.tanks)
 
             this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
             this.playerB.score += 1
-            this.playerA.activeTanks -= 1
+            this.playerA.tanks -= 1
         })
 
         this.physics.add.collider(this.blue_beams, this.red_beams, (blue_beam, red_beam) => {
@@ -149,7 +147,7 @@ export class GameScene extends Phaser.Scene {
             }
         }
 
-        if(this.playerA.activeTanks == 0) {
+        if(this.playerA.tanks == 0) {
             this.gameOverText(this.playerB.username)
            
             this.time.addEvent({
@@ -160,7 +158,7 @@ export class GameScene extends Phaser.Scene {
             })
         }
 
-        if(this.playerB.activeTanks == 0) {
+        if(this.playerB.tanks == 0) {
             this.gameOverText(this.playerA.username)
 
             this.time.addEvent({
@@ -272,7 +270,7 @@ export class GameScene extends Phaser.Scene {
     }
 
     setPhysics() {
-        for(let i = 0; i < this.playerA.activeTanks; i++) {
+        for(let i = 0; i < this.playerA.tanks; i++) {
             let blue_tank = this.physics.add.sprite(`blue_tank_fire`)
             this.blue_tanks.add(blue_tank)
             blue_tank.setRandomPosition(0, 60, dimension.width / 2, dimension.height)
@@ -290,7 +288,7 @@ export class GameScene extends Phaser.Scene {
             blue_tank.setBounce(1)
         }
 
-        for(let i = 0; i < this.playerB.activeTanks; i++) {
+        for(let i = 0; i < this.playerB.tanks; i++) {
             let red_tank = this.physics.add.sprite(`red_tank_fire`)
             this.red_tanks.add(red_tank)
             red_tank.setRandomPosition(dimension.width / 2, 60, dimension.width, dimension.height)
