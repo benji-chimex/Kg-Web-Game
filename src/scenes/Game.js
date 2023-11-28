@@ -1,5 +1,6 @@
 import { dimension, GameVar, phaser } from "@/app/components/Game"
-import Phaser from "phaser"
+
+const Phaser = await import("phaser")
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -103,8 +104,6 @@ export class GameScene extends Phaser.Scene {
             explode.play("explode_anim")
             this.explosion.play()
 
-            console.log(this.playerA.tanks, this.playerB.tanks)
-
             this.scoreA.setText(`SCORE:${this.playerA.score + 1}`)
             this.playerA.score += 1
             this.playerB.tanks -= 1
@@ -117,8 +116,6 @@ export class GameScene extends Phaser.Scene {
             let explode = this.physics.add.sprite(tank.x, tank.y, "explode")
             explode.play("explode_anim")
             this.explosion.play()
-
-            console.log(this.playerA.tanks, this.playerB.tanks)
 
             this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
             this.playerB.score += 1
@@ -180,8 +177,24 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
-    gameOver() {
-        phaser.destroy(false, false)
+    formatTime(seconds) {
+        let minutes = Math.floor(seconds / 60)
+        minutes = minutes.toString().padStart(2, "0")
+
+        let _seconds = seconds % 60
+        _seconds = _seconds.toString().padStart(2, "0")
+
+        return `${minutes}:${_seconds}`
+    }
+
+    async gameOver() {
+        phaser.destroy(true, true)
+
+        const response = await fetch(`https://kg-web-server.onrender.com/deactivate/${GameVar.gameId}`)
+        const data = await response.text()
+        console.log(data)
+
+        window.location.reload()
     }
 
     gameOverText(username) {
@@ -229,6 +242,10 @@ export class GameScene extends Phaser.Scene {
         }
     }
 
+    randomSpeed() {
+        return Phaser.Math.Between(30, 50)
+    }
+
     shootBeam() {
         this.beam.play()
 
@@ -253,20 +270,6 @@ export class GameScene extends Phaser.Scene {
             this.physics.world.enableBody(red_beam)
             red_beam.body.velocity.x = - 200
         }
-    }
-
-    formatTime(seconds) {
-        let minutes = Math.floor(seconds / 60)
-        minutes = minutes.toString().padStart(2, "0")
-
-        let _seconds = seconds % 60
-        _seconds = _seconds.toString().padStart(2, "0")
-
-        return `${minutes}:${_seconds}`
-    }
-
-    randomSpeed() {
-        return Phaser.Math.Between(10, 20)
     }
 
     setPhysics() {
@@ -307,15 +310,3 @@ export class GameScene extends Phaser.Scene {
         }
     }
 }
-
-// export default function Gaming() {
-//     const [x, setX] = useState("X")
-
-//     useEffect(() => {
-//         console.log(x)
-//     })
-
-//     return (
-//         <></>
-//     )
-// }

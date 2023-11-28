@@ -14,15 +14,13 @@ export default function Game({ game }) {
     useEffect(() => {
         const startGame = async () => {
             const _phaser = await initGame()
-            dimension = { width: 1200, height: 600}
+            dimension = { width: 1200, height: 600 }
+            GameVar = game
 
             setPhaser(_phaser)
             phaser = _phaser
         }
         startGame()
-
-        GameVar = game
-        console.log(GameVar, "game", game)
     }, [])
 
     const initGame = async () => {

@@ -1,5 +1,6 @@
 import { dimension, phaser, GameVar } from "@/app/components/Game"
-import Phaser from "phaser"
+
+const Phaser = await import("phaser")
 
 export class LoadingScene extends Phaser.Scene {
     constructor() {
@@ -7,8 +8,11 @@ export class LoadingScene extends Phaser.Scene {
     }
 
     preload() {
+        const int = this.random()
+        console.log(int)
+
         // Load background image
-        this.load.image("background", "grass/grass-1.jpg")
+        this.load.image("background", `background/battleground-${int}.png`)
 
         // Load beam images
         this.load.image("blue_beam", "beam/blue_beam.png")
@@ -40,5 +44,9 @@ export class LoadingScene extends Phaser.Scene {
             fontSize : "50px"
         })
         this.scene.start("PlayGame")
+    }
+
+    random() {
+        return Phaser.Math.Between(1, 4)
     }
 }

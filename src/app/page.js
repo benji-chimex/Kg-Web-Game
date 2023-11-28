@@ -6,32 +6,21 @@ import Intro from "./components/Intro"
 import { INTERVAL } from "@/constants"
 
 export default function HomePage() {
-  const [gaming, setGaming] = useState(false)
   const [game, setGame] = useState()
+  const [gaming, setGaming] = useState()
 
   useEffect(() => {
-    const timeout01 = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setGaming(true)
     }, (INTERVAL*60*1000) + 5000)
 
-    let timeout02 = null
-
     const _game = async () => {
-      const {duration, gameId} = await getGame()
-      console.log(duration, gameId)
-
-      timeout02 = setTimeout(() => {
-        endGame(gameId)
-      }, (duration*60*1000) + (INTERVAL*60*1000) + 15000)
-      console.log(timeout02)
+      await getGame()
     }
 
     _game()
 
-    return () => {
-      clearTimeout(timeout01)
-      clearTimeout(timeout02)
-    }
+    return () => clearTimeout(timeout)
   }, [gaming])
 
   const getGame = async () => {
@@ -42,14 +31,6 @@ export default function HomePage() {
     setGame(data._doc)
 
     return data._doc
-  }
-
-  const endGame = async (id) => {
-    const response = await fetch(`http://localhost:8000/deactivate/${id}`)
-    const data = await response.text()
-    console.log(data)
-
-    data == "Success" ? setGaming(false) : null
   }
 
   return (
