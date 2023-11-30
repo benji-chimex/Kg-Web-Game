@@ -4,10 +4,11 @@ import { useEffect, useState } from "react"
 import Game from "./components/Game"
 import Intro from "./components/Intro"
 import { INTERVAL } from "@/constants"
+import Outro from "./components/Outro"
 
 export default function HomePage() {
   const [game, setGame] = useState()
-  const [gaming, setGaming] = useState()
+  const [gaming, setGaming] = useState(false)
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -21,7 +22,7 @@ export default function HomePage() {
     _game()
 
     return () => clearTimeout(timeout)
-  }, [gaming])
+  }, [])
 
   const getGame = async () => {
     const response = await fetch("https://kg-web-server.onrender.com/games")
@@ -35,7 +36,9 @@ export default function HomePage() {
 
   return (
     <>
-      { gaming ? <Game game={game}/> : <Intro duration={INTERVAL}/> }
+      { game && gaming && <Game game={game}/> }
+      { game && !gaming && <Intro duration={INTERVAL}/> }
+      { !game && !gaming && <Outro/> }
     </>
   )
 }
