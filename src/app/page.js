@@ -16,7 +16,8 @@ export default function HomePage() {
     }, (INTERVAL*60*1000) + 5000)
 
     const _game = async () => {
-      await getGame()
+      const data = await getGame()
+      await activateGame(data.gameId)
     }
 
     _game()
@@ -32,6 +33,12 @@ export default function HomePage() {
     setGame(data._doc)
 
     return data._doc
+  }
+
+  const activateGame = async (id) => {
+    const response = await fetch(`https://kg-web-server.onrender.com/activate/${id}`)
+    const data = await response.text()
+    console.log(data)
   }
 
   return (

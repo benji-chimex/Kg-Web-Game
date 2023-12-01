@@ -12,21 +12,18 @@ export class LoadingScene extends Phaser.Scene {
         console.log(int)
 
         // Load background image
-        this.load.image("background", `background/battleground-${int}.png`)
+        this.load.image("background", `backgrounds/battleground-${int}.png`)
+
+        // No of players
+        this.playerCount = GameVar.players.length
 
         // Load beam images
-        this.load.image("blue_beam", "beam/blue_beam.png")
-        this.load.image("red_beam", "beam/red_beam.png")
+        this.loadBeamImages()
 
-        // Load spritesheets
-        this.load.spritesheet("blue_tank_fire", "bluetank/right_fire_blue-Sheet.png", {
-            frameWidth : 64,
-            frameHeight : 64
-        })
-        this.load.spritesheet("red_tank_fire", "redtank/left_fire_red-Sheet.png", {
-            frameWidth : 64,
-            frameHeight : 64
-        })
+        // Load tank spritesheets
+        this.loadTankImages()
+
+        // Load explosion spritesheet
         this.load.spritesheet("explode", "explosion/explosion.png", {
             frameWidth : 256,
             frameHeight : 256
@@ -44,6 +41,65 @@ export class LoadingScene extends Phaser.Scene {
             fontSize : "50px"
         })
         this.scene.start("PlayGame")
+    }
+
+    loadBeamImages() {
+        if(this.playerCount == 2) {
+            this.load.image("blue_beam", "beams/blue_beam.png")
+            this.load.image("red_beam", "beams/red_beam.png")
+        } else if(this.playerCount == 3) {
+            this.load.image("blue_beam", "beams/blue_beam.png")
+            this.load.image("red_beam", "beams/red_beam.png")
+            this.load.image("white_beam", "beams/white_beam.png")
+        } else if(this.playerCount == 4) {
+            this.load.image("blue_beam", "beams/blue_beam.png")
+            this.load.image("red_beam", "beams/red_beam.png")
+            this.load.image("white_beam", "beams/white_beam.png")
+            this.load.image("black_beam", "beams/black_beam.png")
+        }
+    }
+
+    loadTankImages() {
+        if(this.playerCount == 2) {
+            this.load.spritesheet("blue_tank", "tanks/blue_right.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("red_tank", "tanks/red_left.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+        } else if(this.playerCount == 3) {
+            this.load.spritesheet("blue_tank", "tanks/blue_right.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("red_tank", "tanks/red_left.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("white_tank", "tanks/white_right.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+        } else if(this.playerCount == 4) {
+            this.load.spritesheet("blue_tank", "tanks/blue_right.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("red_tank", "tanks/red_left.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("white_tank", "tanks/white_right.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+            this.load.spritesheet("black_tank", "tanks/black_left.png", {
+                frameWidth : 64,
+                frameHeight : 64
+            })
+        }
     }
 
     random() {
