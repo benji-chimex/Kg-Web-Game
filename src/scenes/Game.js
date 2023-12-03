@@ -98,9 +98,9 @@ export class GameScene extends Phaser.Scene {
                 }
             }
 
-            for(let i = 0; i < this.black_beams.getLength(); i++) {
-                if(this.black_beams.children.entries[i].x >= dimension.width) {
-                    this.black_beams.children.entries[i].destroy()
+            for(let i = 0; i < this.white_beams.getLength(); i++) {
+                if(this.white_beams.children.entries[i].x >= dimension.width) {
+                    this.white_beams.children.entries[i].destroy()
                 }
             }
         } else if(this.playerCount == 4) {
@@ -632,7 +632,7 @@ export class GameScene extends Phaser.Scene {
                 )
                 this.white_beams.add(white_beam)
                 this.physics.world.enableBody(white_beam)
-                white_beam.body.velocity.x = - 200
+                white_beam.body.velocity.x = + 200
             }
         } else if(this.playerCount == 4) {
             for(let i = 0; i < this.blue_tanks.getLength(); i++) {
@@ -665,7 +665,7 @@ export class GameScene extends Phaser.Scene {
                 )
                 this.white_beams.add(white_beam)
                 this.physics.world.enableBody(white_beam)
-                white_beam.body.velocity.x = - 200
+                white_beam.body.velocity.x = + 200
             }
 
             for(let i = 0; i < this.black_tanks.getLength(); i++) {
@@ -694,12 +694,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `blue_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`blue_tank`),
                     repeat : -1
                 })
-                blue_tank.play(`tank_anim`)
+                blue_tank.play(`blue_tank_anim`)
     
                 blue_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 blue_tank.setCollideWorldBounds(true)
@@ -717,12 +717,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `red_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`red_tank`),
                     repeat : -1
                 })
-                red_tank.play(`tank_anim`)
+                red_tank.play(`red_tank_anim`)
     
                 red_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 red_tank.setCollideWorldBounds(true)
@@ -740,12 +740,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `blue_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`blue_tank`),
                     repeat : -1
                 })
-                blue_tank.play(`tank_anim`)
+                blue_tank.play(`blue_tank_anim`)
     
                 blue_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 blue_tank.setCollideWorldBounds(true)
@@ -763,12 +763,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `red_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`red_tank`),
                     repeat : -1
                 })
-                red_tank.play(`tank_anim`)
+                red_tank.play(`red_tank_anim`)
     
                 red_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 red_tank.setCollideWorldBounds(true)
@@ -786,12 +786,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `white_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`white_tank`),
                     repeat : -1
                 })
-                white_tank.play(`tank_anim`)
+                white_tank.play(`white_tank_anim`)
     
                 white_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 white_tank.setCollideWorldBounds(true)
@@ -809,12 +809,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `blue_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`blue_tank`),
                     repeat : -1
                 })
-                blue_tank.play(`tank_anim`)
+                blue_tank.play(`blue_tank_anim`)
     
                 blue_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 blue_tank.setCollideWorldBounds(true)
@@ -832,12 +832,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `red_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`red_tank`),
                     repeat : -1
                 })
-                red_tank.play(`tank_anim`)
+                red_tank.play(`red_tank_anim`)
     
                 red_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 red_tank.setCollideWorldBounds(true)
@@ -855,12 +855,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `white_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`white_tank`),
                     repeat : -1
                 })
-                white_tank.play(`tank_anim`)
+                white_tank.play(`white_tank_anim`)
     
                 white_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 white_tank.setCollideWorldBounds(true)
@@ -878,12 +878,12 @@ export class GameScene extends Phaser.Scene {
                 )
 
                 this.anims.create({
-                    key : `tank_anim`,
+                    key : `black_tank_anim`,
                     frameRate : 20,
                     frames : this.anims.generateFrameNumbers(`black_tank`),
                     repeat : -1
                 })
-                black_tank.play(`tank_anim`)
+                black_tank.play(`black_tank_anim`)
     
                 black_tank.setVelocity(this.randomSpeed(), this.randomSpeed())
                 black_tank.setCollideWorldBounds(true)
@@ -985,7 +985,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreC.setText(`SCORE:${this.playerC.score + 1}`)
                 this.playerC.score += 1
                 this.playerA.tanks -= 1
             })
@@ -998,7 +998,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreC.setText(`SCORE:${this.playerC.score + 1}`)
                 this.playerC.score += 1
                 this.playerB.tanks -= 1
             })
@@ -1102,7 +1102,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreC.setText(`SCORE:${this.playerC.score + 1}`)
                 this.playerC.score += 1
                 this.playerA.tanks -= 1
             })
@@ -1115,7 +1115,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreC.setText(`SCORE:${this.playerC.score + 1}`)
                 this.playerC.score += 1
                 this.playerB.tanks -= 1
             })
@@ -1128,7 +1128,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreC.setText(`SCORE:${this.playerC.score + 1}`)
                 this.playerC.score += 1
                 this.playerD.tanks -= 1
             })
@@ -1141,7 +1141,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreD.setText(`SCORE:${this.playerD.score + 1}`)
                 this.playerD.score += 1
                 this.playerA.tanks -= 1
             })
@@ -1154,7 +1154,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreD.setText(`SCORE:${this.playerD.score + 1}`)
                 this.playerC.score += 1
                 this.playerB.tanks -= 1
             })
@@ -1167,7 +1167,7 @@ export class GameScene extends Phaser.Scene {
                 explode.play("explode_anim")
                 this.explosion.play()
     
-                this.scoreB.setText(`SCORE:${this.playerB.score + 1}`)
+                this.scoreD.setText(`SCORE:${this.playerD.score + 1}`)
                 this.playerD.score += 1
                 this.playerC.tanks -= 1
             })

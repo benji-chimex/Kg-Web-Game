@@ -17,7 +17,7 @@ export default function HomePage() {
 
     const _game = async () => {
       const data = await getGame()
-      await activateGame(data.gameId)
+      data ? await activateGame(data.gameId) : null
     }
 
     _game()
