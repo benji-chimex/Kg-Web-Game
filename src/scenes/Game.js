@@ -135,7 +135,7 @@ export class GameScene extends Phaser.Scene {
                
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerB.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -146,7 +146,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerA.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -157,7 +157,7 @@ export class GameScene extends Phaser.Scene {
                
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerC.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -168,7 +168,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerA.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -179,7 +179,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerB.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -190,7 +190,7 @@ export class GameScene extends Phaser.Scene {
                
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerD.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -201,7 +201,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerA.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -212,7 +212,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerB.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -223,7 +223,7 @@ export class GameScene extends Phaser.Scene {
     
                 this.time.addEvent({
                     delay : 5000,
-                    callback : this.gameOver,
+                    callback : this.gameOver(this.playerC.id),
                     callbackScope : this,
                     loop : false
                 })
@@ -251,12 +251,12 @@ export class GameScene extends Phaser.Scene {
         return `${minutes}:${_seconds}`
     }
 
-    async gameOver() {
-        phaser.destroy(true, true)
-
-        const response = await fetch(`https://kg-web-server.onrender.com/deactivate/${GameVar.gameId}`)
+    async gameOver(id) {
+        const response = await fetch(`http://localhost:8000/deactivate/${GameVar.gameId}/${id}`)
         const data = await response.text()
         console.log(data)
+
+        phaser.destroy(true, true)
 
         window.location.reload()
     }
